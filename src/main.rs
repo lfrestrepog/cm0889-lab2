@@ -1,42 +1,86 @@
-//use rand::Rng;
-
+use rand::Rng;
 
 fn main() {
-    println!("Sorted:");
+    
+    let mut sample = random_sample(10);
+    println!("Sample array: {:?}", sample);
+    let sorted = bubble_sort(&mut sample);
+    println!("{:?}", sorted);
 
-    let mut sample1 = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let sorted1 = bubble_sort(&mut sample1);
-    println!("{:?}", sorted1);
-
-    println!("Inverse:");
-    let mut sample2 = [9, 8, 7, 6, 5, 4, 3, 2, 1];
-    let sorted2 = selection_sort(&mut sample2);
+    let mut sample = nearly_sorted_sample(20);
+    println!("Sample nearly sorted array: {:?}", sample);
+    let sorted2 = selection_sort(&mut sample);
     println!("{:?}", sorted2);
 
     println!("Unordered:");
-    let mut sample3 = [9, 3, 6, 1, 7, 2, 5, 4, 8, 2, 4, 6, 2, 4];
-    let sorted3 = insertion_sort(&mut sample3);
+    let mut sample = random_sample(14);
+    println!("Sample array: {:?}", sample);
+    let sorted3 = insertion_sort(&mut sample);
     println!("{:?}", sorted3);
     
     println!("Other inverse:");
-    let mut sample4 = [9, 8, 7, 6, 5, 4, 3, 2, 1];
-    let sorted4 = shell_sort(&mut sample4);
+    let mut sample = reversed_sample(10);
+    println!("Sample array: {:?}", sample);
+    let sorted4 = shell_sort(&mut sample);
     println!("{:?}", sorted4);
 
     println!("Other unordered:");
-    let mut sample2 = [9, 3, 6, 1, 7, 2, 5, 4, 1, 8, 2, 4, 6, 9, 4, 9];
-    let sorted2 = merge_sort(&mut sample2);
+    let sample = random_sample(10);
+    println!("Sample array: {:?}", sample);
+    let sorted2 = merge_sort(&sample);
     println!("{:?}", sorted2);
 
     println!("Last unordered:");
-    let mut sample3 = [9, 3, 6, 1, 7, 2, 5, 4, 8, 2, 4, 6, 2, 4];
-    let sorted3 = quick_sort(&mut sample3);
-    println!("{:?}", sorted3);
+    let mut sample = few_unique_sample(100, 10);
+    println!("Sample array: {:?}", sample);
+    let sorted = quick_sort(&mut sample);
+    println!("{:?}", sorted);
     
 
 }
 
+fn random_sample(size: i32) -> Vec<i32> {
+    let mut nums: Vec<i32> = Vec::new();
+    for _ in 0..size {
+        nums.push(rand::thread_rng().gen_range(0, size));
+    }
+    nums
+}
+
+fn nearly_sorted_sample(size: i32) -> Vec<i32> {
+    let mut nums: Vec<i32> = Vec::new();
+    let mut rng = rand::thread_rng();
+    for i in 0..size {
+        let t: f32 = rng.gen();
+        if t < 0.2 {
+            nums.push(rng.gen_range(0, size));
+            continue;
+        }
+        nums.push(i);
+    }
+    nums
+}
+
+fn reversed_sample(size: i32) -> Vec<i32> {
+    let mut nums: Vec<i32> = Vec::new();
+    for i in 0..size {
+        nums.push(size - i);
+    }
+    nums
+}
+
+fn few_unique_sample(size: i32, ratio: i32) -> Vec<i32> {
+    let mut nums: Vec<i32> = Vec::new();
+    let mut rng = rand::thread_rng();
+    let unique = size * ratio / 100;
+    for _ in 0..size {
+        nums.push(rng.gen_range(0, unique))
+    }
+    nums
+}
+
 fn bubble_sort(numbers: &mut [i32]) -> &[i32] {
+    // Stephens, R. (n.d.). Essential Algorithms: A Practical Approach to Computer Algorithms. Wiley.
     loop {
         let mut sorted = true;
         let l = numbers.len() - 1;
@@ -55,6 +99,7 @@ fn bubble_sort(numbers: &mut [i32]) -> &[i32] {
 }
 
 fn selection_sort(numbers: &mut [i32]) -> &[i32] {
+    // Stephens, R. (n.d.). Essential Algorithms: A Practical Approach to Computer Algorithms. Wiley.
     let l = numbers.len();
     let mut i = 0;
     while i < l - 1 {
@@ -73,6 +118,7 @@ fn selection_sort(numbers: &mut [i32]) -> &[i32] {
 }
 
 fn insertion_sort(numbers: &mut [i32]) -> &[i32] {
+    // Stephens, R. (n.d.). Essential Algorithms: A Practical Approach to Computer Algorithms. Wiley.
     let l = numbers.len();
     let mut i = 0;
     while i < l {
@@ -112,7 +158,7 @@ fn merge_sort(numbers: &[i32]) -> Vec<i32> {
     // Stephens, R. (n.d.). Essential Algorithms: A Practical Approach to Computer Algorithms. Wiley.
     let l = numbers.len();
     if l == 1 {
-        return vec![numbers[0];1];
+        return vec![numbers[0]; 1];
     }
 
     let h = l / 2;
@@ -150,7 +196,6 @@ fn merge_sort(numbers: &[i32]) -> Vec<i32> {
 
 fn quick_sort(numbers: &mut [i32]) -> &[i32] {
     // Stephens, R. (n.d.). Essential Algorithms: A Practical Approach to Computer Algorithms. Wiley.
-    println!("q {:?}", numbers);
     let l = numbers.len();
     if l <= 1 {
         return numbers;
