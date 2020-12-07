@@ -1,0 +1,49 @@
+Sample layout	Sample size	Algorithm	Time (microseconds)
+Random	1000	Bubble sort	9062
+Random	1000	Selection sort	1758
+Random	1000	Insertion sort	4255
+Random	1000	Shell sort	158
+Nearly sorted	1000	Bubble sort	4609
+Nearly sorted	1000	Selection sort	1738
+Nearly sorted	1000	Insertion sort	990
+Nearly sorted	1000	Shell sort	139
+Reversed	1000	Bubble sort	10682
+Reversed	1000	Selection sort	1852
+Reversed	1000	Insertion sort	8192
+Reversed	1000	Shell sort	72
+Few unique	1000	Bubble sort	7942
+Few unique	1000	Selection sort	1668
+Few unique	1000	Insertion sort	3494
+Few unique	1000	Shell sort	108
+Random	10000	Bubble sort	862944
+Random	10000	Selection sort	164022
+Random	10000	Insertion sort	401253
+Random	10000	Shell sort	2482
+Nearly sorted	10000	Bubble sort	466329
+Nearly sorted	10000	Selection sort	163458
+Nearly sorted	10000	Insertion sort	99399
+Nearly sorted	10000	Shell sort	2146
+Reversed	10000	Bubble sort	1028002
+Reversed	10000	Selection sort	165693
+Reversed	10000	Insertion sort	881103
+Reversed	10000	Shell sort	1107
+Few unique	10000	Bubble sort	1019802
+Few unique	10000	Selection sort	196057
+Few unique	10000	Insertion sort	467689
+Few unique	10000	Shell sort	3138
+Random	100000	Bubble sort	101381207
+Random	100000	Selection sort	17593783
+Random	100000	Insertion sort	50200943
+Random	100000	Shell sort	47096
+Nearly sorted	100000	Bubble sort	56615201
+Nearly sorted	100000	Selection sort	19111830
+Nearly sorted	100000	Insertion sort	10165546
+Nearly sorted	100000	Shell sort	34123
+Reversed	100000	Bubble sort	125431230
+Reversed	100000	Selection sort	21717864
+Reversed	100000	Insertion sort	94031019
+Reversed	100000	Shell sort	18771
+Few unique	100000	Bubble sort	100745412
+Few unique	100000	Selection sort	18729549
+Few unique	100000	Insertion sort	47766291
+Few unique	100000	Shell sort	41708

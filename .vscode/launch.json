@@ -9,7 +9,9 @@
             "type": "lldb",
             "request": "launch",
             "program": "${workspaceFolder}/target/debug/cm0889-lab2",
-            "args": [],
+            "args": [
+                "${workspaceFolder}/results",
+            ],
             "stopOnEntry": false,
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "Rust: cargo build - cm0889-lab2"

@@ -1,0 +1,13 @@
+Sample layout	Sample size	Algorithm	Time (microseconds)
+Random	1000	Merge sort	1668
+Nearly sorted	1000	Merge sort	1575
+Reversed	1000	Merge sort	1427
+Few unique	1000	Merge sort	1631
+Random	10000	Merge sort	19752
+Nearly sorted	10000	Merge sort	17905
+Reversed	10000	Merge sort	15704
+Few unique	10000	Merge sort	18364
+Random	100000	Merge sort	219246
+Nearly sorted	100000	Merge sort	208747
+Reversed	100000	Merge sort	180214
+Few unique	100000	Merge sort	214460
