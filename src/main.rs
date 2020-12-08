@@ -1,97 +1,86 @@
 use rand::Rng;
 use std::env;
-use std::fs;
+use std::fs::OpenOptions;
 use std::time::Instant;
+use std::io::prelude::*;
 
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = env::args().collect();
     let output = &args[1];
+    let sample_size = &args[2];
+    let algorithm = &args[3];
+    let layout = &args[4];
 
-    let sample_sizes = vec![1_000, 10_000, 100_000, 1_000_000];
+    let sample_size: i32 = match sample_size.trim().parse() {
+        Ok(n) => n,
+        Err(_) => 1_000,
+    };
+    let order: f64 = (sample_size as f64).log(10.0);
 
-    let generator_names = vec![SampleLayout::Random, SampleLayout::NearlySorted, SampleLayout::Reversed, SampleLayout::FewUnique];
+    let time_unit = if order < 6.0 {
+        "microseconds"
+    } else {
+        "milliseconds"
+    };
 
-    let mut results = String::from("Sample layout\tSample size\tAlgorithm\tTime (microseconds)\n");
-    for sample_size in sample_sizes {
-        for f in &generator_names {
-            let sample = create_sample(f, sample_size);
-            let layout = layout_name(f);
+    let mut results = String::new();
 
-            let start = Instant::now();
-            let mut to_sort = sample.clone();
-            bubble_sort(&mut to_sort);
-            let duration = start.elapsed().as_micros();
-            results.push_str(&format!(
-                "{}\t{}\tBubble sort\t{}\n",
-                layout, sample_size, duration
-            ));
-            
-            let start = Instant::now();
-            let mut to_sort = sample.clone();
-            selection_sort(&mut to_sort);
-            let duration = start.elapsed().as_micros();
-            results.push_str(&format!(
-                "{}\t{}\tSelection sort\t{}\n",
-                layout, sample_size, duration
-            ));
-            
-            let start = Instant::now();
-            let mut to_sort = sample.clone();
-            insertion_sort(&mut to_sort);
-            let duration = start.elapsed().as_micros();
-            results.push_str(&format!(
-                "{}\t{}\tInsertion sort\t{}\n",
-                layout, sample_size, duration
-            ));
-
-            let start = Instant::now();
-            let mut to_sort = sample.clone();
-            shell_sort(&mut to_sort);
-            let duration = start.elapsed().as_micros();
-            results.push_str(&format!(
-                "{}\t{}\tShell sort\t{}\n",
-                layout, sample_size, duration
-            ));
-
-            let start = Instant::now();
-            let mut to_sort = sample.clone();
-            merge_sort(&mut to_sort);
-            let duration = start.elapsed().as_micros();
-            results.push_str(&format!(
-                "{}\t{}\tMerge sort\t{}\n",
-                layout, sample_size, duration
-            ));
-/*
-            let start = Instant::now();
-            let mut to_sort = sample.clone();
-            quick_sort(&mut to_sort);
-            let duration = start.elapsed().as_micros();
-            results.push_str(&format!(
-                "{}\t{}\tQuick sort\t{}\n",
-                layout, sample_size, duration
-            ));*/
-        }
+    let sample = create_sample(layout_from_name(layout), sample_size);
+    let start = Instant::now();
+    let mut to_sort = sample.clone();
+    if "bubble" == algorithm {
+        bubble_sort(&mut to_sort);
+    } else if "selection" == algorithm {
+        selection_sort(&mut to_sort);
+    } else if "insertion" == algorithm {
+        insertion_sort(&mut to_sort);
+    } else if "shell" == algorithm {
+        shell_sort(&mut to_sort);
+    } else if "merge" == algorithm {
+        merge_sort(&mut to_sort);
+    } else if "quick" == algorithm {
+        quick_sort(&mut to_sort);
+    } else {
+        to_sort.sort();
     }
-    let path = format!("{}/samples.txt", output);
-    fs::write(path, results)?;
+
+    let duration = if order < 6.0 {
+            start.elapsed().as_micros()
+        } else {
+            start.elapsed().as_millis()
+        };
+    results.push_str(&format!(
+        "{}\t{}\t{}\t{}\t{}\n",
+        layout, sample_size, algorithm, duration, time_unit
+    ));
+    let mut file = OpenOptions::new()
+        .append(true)
+        .open(output)
+        .unwrap();
+
+    file.write_all(results.as_bytes())?;
 
     Ok(())
 }
 
 enum SampleLayout {
-    Random, NearlySorted, Reversed, FewUnique
+    Random,
+    NearlySorted,
+    Reversed,
+    FewUnique,
 }
 
-fn layout_name(layout: &SampleLayout) -> &'static str {
+fn layout_from_name(layout: &str) -> SampleLayout {
     match layout {
-        SampleLayout::Random => "Random",
-        SampleLayout::NearlySorted => "Nearly sorted",
-        SampleLayout::Reversed => "Reversed",
-        SampleLayout::FewUnique => "Few unique",
+        "random" => SampleLayout::Random,
+        "nearly sorted" => SampleLayout::NearlySorted,
+        "reversed" => SampleLayout::Reversed,
+        "few unique" => SampleLayout::FewUnique,
+        &_ => SampleLayout::Random,
     }
 }
 
-fn create_sample(layout: &SampleLayout, size: i32) -> Vec<i32> {
+fn create_sample(layout: SampleLayout, size: i32) -> Vec<i32> {
     match layout {
         SampleLayout::Random => random_sample(size),
         SampleLayout::NearlySorted => nearly_sorted_sample(size),

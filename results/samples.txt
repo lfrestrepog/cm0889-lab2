@@ -1,0 +1,65 @@
+Sample layout	Sample size	Algorithm	Duration    Time units
+reversed	1000	quick	2333	microseconds
+reversed	10000	quick	154904	microseconds
+random	100000	quick	17560	microseconds
+random	1000	quick	123	microseconds
+random	10000	quick	1471	microseconds
+random	100000	quick	19511	microseconds
+random	1000000	quick	211624	microseconds
+random	10000000	quick	2452	milliseconds
+random	5000	quick	698	microseconds
+random	50000	quick	8766	microseconds
+random	20000	quick	3161	microseconds
+nearly sorted	1000	quick	165	microseconds
+nearly sorted	5000	quick	700	microseconds
+nearly sorted	10000	quick	2254	microseconds
+nearly sorted	20000	quick	2802	microseconds
+nearly sorted	30000	quick	5331	microseconds
+nearly sorted	50000	quick	6796	microseconds
+nearly sorted	100000	quick	15602	microseconds
+nearly sorted	150000	quick	36893	microseconds
+nearly sorted	200000	quick	47113	microseconds
+nearly sorted	1000000	quick	264882	microseconds
+nearly sorted	1100000	quick	211	milliseconds
+nearly sorted	12000000	quick	3245	milliseconds
+nearly sorted	15000000	quick	3795	milliseconds
+nearly sorted	20000000	quick	5612	milliseconds
+nearly sorted	19000000	quick	5449	milliseconds
+few unique	1000	quick	252	microseconds
+few unique	2000	quick	532	microseconds
+few unique	5000	quick	1326	microseconds
+few unique	10000	quick	2599	microseconds
+few unique	20000	quick	5519	microseconds
+few unique	30000	quick	8646	microseconds
+few unique	50000	quick	14505	microseconds
+few unique	100000	quick	28347	microseconds
+few unique	150000	quick	44108	microseconds
+few unique	200000	quick	62281	microseconds
+few unique	300000	quick	91454	microseconds
+few unique	500000	quick	156567	microseconds
+few unique	1000000	quick	327498	microseconds
+few unique	1200000	quick	394	milliseconds
+few unique	1300000	quick	429	milliseconds
+few unique	1400000	quick	457	milliseconds
+few unique	1500000	quick	494	milliseconds
+few unique	2000000	quick	667	milliseconds
+reversed	1000	quick	1748	microseconds
+reversed	10000	quick	154465	microseconds
+reversed	2000	quick	7738	microseconds
+reversed	3000	quick	15741	microseconds
+reversed	5000	quick	40542	microseconds
+reversed	10000	quick	151657	microseconds
+reversed	20000	quick	609590	microseconds
+reversed	25000	quick	944609	microseconds
+random	1000	bubble	8738	microseconds
+random	10000	bubble	881011	microseconds
+random	5000	bubble	219689	microseconds
+random	2000	bubble	37044	microseconds
+random	20000	bubble	3521671	microseconds
+random	30000	bubble	7880957	microseconds
+random	30000	bubble	7840502	microseconds
+random	25000	bubble	5448152	microseconds
+random	50000	bubble	21656751	microseconds
+random	100000	bubble	88483330	microseconds
+random	120000	bubble	126551830	microseconds
+random	150000	bubble	198732616	microseconds

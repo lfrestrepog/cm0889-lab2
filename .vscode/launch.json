@@ -10,7 +10,10 @@
             "request": "launch",
             "program": "${workspaceFolder}/target/debug/cm0889-lab2",
             "args": [
-                "${workspaceFolder}/results",
+                "${workspaceFolder}/results/debug.txt",
+                "20",
+                "quick",
+                "random"
             ],
             "stopOnEntry": false,
             "cwd": "${workspaceRoot}",
