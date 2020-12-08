@@ -1,8 +1,8 @@
 use rand::Rng;
 use std::env;
 use std::fs::OpenOptions;
-use std::time::Instant;
 use std::io::prelude::*;
+use std::time::Instant;
 
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = env::args().collect();
@@ -40,23 +40,22 @@ fn main() -> std::io::Result<()> {
         merge_sort(&mut to_sort);
     } else if "quick" == algorithm {
         quick_sort(&mut to_sort);
+    } else if "tail" == algorithm {
+        tail_quicksort(&mut to_sort, 0, sample_size - 1);
     } else {
         to_sort.sort();
     }
 
     let duration = if order < 6.0 {
-            start.elapsed().as_micros()
-        } else {
-            start.elapsed().as_millis()
-        };
+        start.elapsed().as_micros()
+    } else {
+        start.elapsed().as_millis()
+    };
     results.push_str(&format!(
         "{}\t{}\t{}\t{}\t{}\n",
         layout, sample_size, algorithm, duration, time_unit
     ));
-    let mut file = OpenOptions::new()
-        .append(true)
-        .open(output)
-        .unwrap();
+    let mut file = OpenOptions::new().append(true).open(output).unwrap();
 
     file.write_all(results.as_bytes())?;
 
@@ -290,4 +289,42 @@ fn quick_sort(numbers: &mut [i32]) -> &[i32] {
         quick_sort(&mut numbers[lo + 1..]);
     }
     numbers
+}
+
+fn tail_quicksort(mut numbers: &mut [i32], mut left: i32, mut right: i32) -> &[i32] {
+    // https://writeach.com/posts/-MA2pAq6svg0-F-Lhe4b/Quicksort-in-C%2B%2B-with-Tail-Recursion
+    while left < right {
+        let pivot = partition(&mut numbers, left, right);
+        if pivot - left <= right - pivot {
+            tail_quicksort(&mut numbers, left, pivot - 1);
+            left = pivot + 1;
+        } else {
+            tail_quicksort(&mut numbers, pivot + 1, right);
+            right = pivot - 1;
+        }
+    }
+
+    numbers
+}
+
+fn partition(numbers: &mut [i32], left: i32, right: i32) -> i32 {
+    // https://writeach.com/posts/-MA2pAq6svg0-F-Lhe4b/Quicksort-in-C%2B%2B-with-Tail-Recursion
+    let mut low = left as usize;
+    let mut high = right as usize;
+    let pivot = high;
+    while low < high {
+        while numbers[low] < numbers[pivot] && low <= pivot {
+            low += 1;
+        }
+        while numbers[high] >= numbers[pivot] && high > low {
+            high -= 1;
+        }
+
+        if low < high {
+            numbers.swap(low, high);
+            low += 1;
+        }
+    }
+    numbers.swap(low, pivot);
+    low as i32
 }

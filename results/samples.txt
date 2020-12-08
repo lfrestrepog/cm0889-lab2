@@ -63,3 +63,27 @@ random	50000	bubble	21656751	microseconds
 random	100000	bubble	88483330	microseconds
 random	120000	bubble	126551830	microseconds
 random	150000	bubble	198732616	microseconds
+random	2000	tail	324	microseconds
+random	10000	tail	1928	microseconds
+random	20000	tail	4166	microseconds
+random	2000	tail	371	microseconds
+random	2000	tail	349	microseconds
+random	2000	tail	342	microseconds
+random	2000	tail	460	microseconds
+random	2000	tail	435	microseconds
+random	3000	tail	609	microseconds
+random	10000	tail	2078	microseconds
+random	20000	tail	4386	microseconds
+reversed	10000	quick	182799	microseconds
+reversed	20000	quick	714367	microseconds
+reversed	10000	tail	222571	microseconds
+reversed	20000	tail	754728	microseconds
+reversed	30000	tail	1666636	microseconds
+reversed	40000	tail	3382165	microseconds
+reversed	50000	tail	4573732	microseconds
+reversed	100000	tail	21823564	microseconds
+reversed	150000	tail	50554085	microseconds
+reversed	500000	tail	551997538	microseconds
+random	500000	tail	142935	microseconds
+few unique	500000	tail	238995	microseconds
+nearly sorted	500000	tail	190914	microseconds

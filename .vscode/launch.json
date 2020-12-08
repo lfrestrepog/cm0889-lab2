@@ -11,9 +11,9 @@
             "program": "${workspaceFolder}/target/debug/cm0889-lab2",
             "args": [
                 "${workspaceFolder}/results/debug.txt",
-                "20",
+                "1000000",
                 "quick",
-                "random"
+                "reversed"
             ],
             "stopOnEntry": false,
             "cwd": "${workspaceRoot}",

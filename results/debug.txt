@@ -1,0 +1,2 @@
+Sample layout	Sample size	Algorithm	Duration    Time units
+random	20	tail	1338	microseconds
