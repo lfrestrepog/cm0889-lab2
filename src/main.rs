@@ -15,16 +15,7 @@ fn main() -> std::io::Result<()> {
         Ok(n) => n,
         Err(_) => 1_000,
     };
-    let order: f64 = (sample_size as f64).log(10.0);
-
-    let time_unit = if order < 6.0 {
-        "microseconds"
-    } else {
-        "milliseconds"
-    };
-
-    let mut results = String::new();
-
+    
     let sample = create_sample(layout_from_name(layout), sample_size);
     let start = Instant::now();
     let mut to_sort = sample.clone();
@@ -46,15 +37,16 @@ fn main() -> std::io::Result<()> {
         to_sort.sort();
     }
 
-    let duration = if order < 6.0 {
-        start.elapsed().as_micros()
+    let duration = start.elapsed();
+    let (duration, time_unit) = if duration.as_micros() < 10000 {
+        (start.elapsed().as_micros(), "microseconds")
     } else {
-        start.elapsed().as_millis()
+        (start.elapsed().as_millis(), "milliseconds")
     };
-    results.push_str(&format!(
+    let results = format!(
         "{}\t{}\t{}\t{}\t{}\n",
         layout, sample_size, algorithm, duration, time_unit
-    ));
+    );
     let mut file = OpenOptions::new().append(true).open(output).unwrap();
 
     file.write_all(results.as_bytes())?;

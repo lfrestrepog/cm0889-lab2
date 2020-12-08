@@ -87,3 +87,14 @@ reversed	500000	tail	551997538	microseconds
 random	500000	tail	142935	microseconds
 few unique	500000	tail	238995	microseconds
 nearly sorted	500000	tail	190914	microseconds
+nearly sorted	500000	tail	34	milliseconds
+nearly sorted	500000	tail	35	milliseconds
+nearly sorted	500000	tail	30	milliseconds
+nearly sorted	500000	tail	29	milliseconds
+nearly sorted	500000	tail	33	milliseconds
+nearly sorted	500000	tail	35	milliseconds
+nearly sorted	500000	quick	39	milliseconds
+nearly sorted	500000	quick	28	milliseconds
+nearly sorted	500000	quick	26	milliseconds
+nearly sorted	500000	quick	27	milliseconds
+nearly sorted	500000	quick	29	milliseconds

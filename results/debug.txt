@@ -1,2 +1,5 @@
 Sample layout	Sample size	Algorithm	Duration    Time units
 random	20	tail	1338	microseconds
+nearly sorted	500000	tail	265087	microseconds
+nearly sorted	500	tail	110	microseconds
+nearly sorted	500000	tail	172	milliseconds
