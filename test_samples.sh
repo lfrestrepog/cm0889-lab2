@@ -10,9 +10,10 @@ for algorithm in 'merge' 'quick' 'tail' 'bubble' 'selection' 'insertion' 'shell'
     for layout in 'random' 'nearly sorted' 'reversed' 'few unique'; do
         for size in 1000 2000 3000 5000 10000 20000 50000 100000 150000 500000 1000000 1500000 2000000; do
             echo "Trying algorithm ${algorithm} with size ${size} and layout ${layout}."
-            target/release/cm0889-lab2 ${output} ${size} ${algorithm} ${layout}
-            if [ $? -ne 0 ]; then
-                echo "Crashed!"
+            timeout --preserve-status 20m target/release/cm0889-lab2 ${output} ${size} ${algorithm} ${layout}
+            r=$?
+            if [ $r -ne 0 ]; then
+                echo "${layout}	${size}	${algorithm}	error	$r" >> $output
                 break
             fi
         done
