@@ -49,5 +49,5 @@ Do notice the application expects the output file to exist, because that makes i
 
 Quicksort is embarrassingly slow when the input is in reverse order, that's well documented in the litterature and most production quality implementations randomize input to address this. But not my implementation here, I'm interested in actual worst case scenario.
 
-Also in the case of revered input the recursive implementation of quicksort, without tail call optimisation, fails for large input sizes because it overflows the stack (luckily it fails really fast, so we don't waste much time).
+Also in the case of reversed input the recursive implementation of quicksort, without tail call optimisation, fails for large input sizes because it overflows the stack (luckily it fails really fast, so we don't waste much time).
 
