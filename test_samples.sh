@@ -3,7 +3,7 @@ output=$1
 
 if [ ! -f $output ]; then
     echo 'New results file.'
-    echo 'Sample layout	Sample size	Algorithm	Duration    Time units' > $output
+    echo 'Sample layout	Sample size	Algorithm	Duration	Time units' > $output
 fi
 
 for algorithm in 'merge' 'quick' 'tail' 'bubble' 'selection' 'insertion' 'shell'; do
