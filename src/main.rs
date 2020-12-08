@@ -208,7 +208,7 @@ fn merge_sort(numbers: &[i32]) -> Vec<i32> {
     // Stephens, R. (n.d.). Essential Algorithms: A Practical Approach to Computer Algorithms. Wiley.
     let l = numbers.len();
     if l == 1 {
-        return vec![numbers[0]; 1];
+        return numbers.to_vec();
     }
 
     let h = l / 2;
